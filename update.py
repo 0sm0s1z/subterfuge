@@ -57,15 +57,8 @@ def updatecheck():
 	   release = int(current_revision_number) - int(initial_revision_number)
 	   version = str(major_release_version) + "." + str(minor_release_version) + "." + str(release)
 		   #Check For New Updates
-	   HOST = 'kinozoa.com' #Update Server
-	   PORT = 5733 #Update Port
-	   s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-	   s.connect((HOST, PORT))
-	   s.send('getversion')
-	   data = s.recv(1024)
-	   s.close()
-	   newversion = data.strip('\n')
-
+	   gitversion()
+ 
 	   if version != newversion:
 	      os.system("python /usr/share/subterfuge/update.py")
 	   else:
@@ -79,6 +72,9 @@ def updatecheck():
 
  except:
   pass 
+
+def gitversion():
+   print "Querying repository and comparing build details..."
 
 if __name__ == '__main__':
    main()	
